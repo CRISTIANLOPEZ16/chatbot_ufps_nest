@@ -1,4 +1,4 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, Delete, Put } from '@nestjs/common';
 import { RespuestaService } from './respuesta.service';
 import { CreateRespuestaDto } from './dto/respuesta.dto';
 import { UpdateRespuestaDto } from './dto/respuesta.dto';
@@ -13,7 +13,7 @@ export class RespuestaController {
     return this.respuestaService.create(createRespuestaDto);
   }
 
-  @Get()
+  @Put()
   findAll(pagination:Pagination) {
     return this.respuestaService.findAll(pagination);
   }

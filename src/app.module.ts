@@ -10,9 +10,14 @@ import { ConsultaModule } from './consulta/consulta.module';
 import { typeOrmAsyncConfig } from './typeorm';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { ConfigModule } from '@nestjs/config';
+import { ServeStaticModule } from '@nestjs/serve-static';
+import { join } from 'path';
 
 @Module({
   imports: [
+    ServeStaticModule.forRoot({
+      rootPath: join(__dirname, '..', 'public'),
+    }),
     ConfigModule.forRoot({
       isGlobal: true,
       envFilePath: `./config/env/.${process.env.NODE_ENV}.env`,

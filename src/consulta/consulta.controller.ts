@@ -1,4 +1,4 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, Delete, Put } from '@nestjs/common';
 import { Pagination } from 'src/base';
 import { ConsultaService } from './consulta.service';
 import { CreateConsultaDto } from './dto/consulta.dto';
@@ -13,7 +13,7 @@ export class ConsultaController {
     return this.consultaService.create(createConsultaDto);
   }
 
-  @Get()
+  @Put()
   findAll(pagination:Pagination) {
     return this.consultaService.findAll(pagination);
   }
