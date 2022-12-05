@@ -14,7 +14,7 @@ export class RespuestaController {
   }
 
   @Put()
-  findAll(pagination:Pagination) {
+  findAll(@Body() pagination:Pagination) {
     return this.respuestaService.findAll(pagination);
   }
 

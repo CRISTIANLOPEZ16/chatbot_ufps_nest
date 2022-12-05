@@ -2,7 +2,7 @@ import { Controller, Get, Post, Body, Patch, Param, Delete, Put, Render } from '
 import { PersonaService } from './persona.service';
 import { CreatePersonaDto } from './dto/persona.dto';
 import { UpdatePersonaDto } from './dto/persona.dto';
-import { Pagination } from 'src/base';
+import { Pagination, User } from 'src/base';
 
 @Controller('persona')
 export class PersonaController {
@@ -23,6 +23,11 @@ export class PersonaController {
   Recuperar(){
     return null;
   }
+  @Post("/log")
+  makeLogin(@Body() usuario:User){
+    return this.personaService.log(usuario)
+  }
+
   @Put()
   findAll(@Body() pagination:Pagination) {
     return this.personaService.findAll(pagination);

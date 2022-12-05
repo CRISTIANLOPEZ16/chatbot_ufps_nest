@@ -22,10 +22,17 @@ export class RespuestaService {
           return {status:500,response:await pregunta.response}
         }
       }else{
-        return {status:200,response: await this.respuestaRepository.save(this.respuestaRepository.create(createRespuestaDto))}
+        const pregunta = await this.preguntaService.update(createRespuestaDto.idPregunta,createRespuestaDto.pregunta)
+        if(pregunta.status==200){
+          const respuesta=this.respuestaRepository.create(createRespuestaDto)
+          respuesta.pregunta=pregunta.response
+          return {status:200,response: await this.respuestaRepository.save(respuesta)}
+        }else{
+          return {status:500,response:pregunta.response}
+        }
       }
     }catch(err){
-      return {status:500,response:err}
+      return {status:500,response:err.message}
     }
   }
 
@@ -33,7 +40,7 @@ export class RespuestaService {
     try{
       return {status:200,response: await this.respuestaRepository.findAndCount({take:pagination.take,skip:pagination.skip})}
     }catch(err){
-      return {status:500,response:err}
+      return {status:500,response:err.message}
     }
   }
 
@@ -41,7 +48,7 @@ export class RespuestaService {
     try{
       return {status:200,response: await this.respuestaRepository.findOne({where:{"id":id},relations:{pregunta:true}})}
     }catch(err){
-      return {status:500,response:err}
+      return {status:500,response:err.message}
     }
   }
 
@@ -49,7 +56,7 @@ export class RespuestaService {
     try{
       return {status:200,response: await this.respuestaRepository.update(id, updateRespuestaDto)}
     }catch(err){
-      return {status:500,response:err}
+      return {status:500,response:err.message}
     }
   }
 
@@ -58,7 +65,7 @@ export class RespuestaService {
       const respuesta=await this.respuestaRepository.findOne({where:{"id":id}})
       return {status:200,response: await this.respuestaRepository.remove(respuesta)}
     }catch(err){
-      return {status:500,response:err}
+      return {status:500,response:err.message}
     }
   }
 }

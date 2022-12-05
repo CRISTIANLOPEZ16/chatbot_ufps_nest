@@ -22,7 +22,7 @@ export class ClienteService {
         return {status:500,response:persona.response}
       }
     }catch(err){
-      return {status:500,response:err}
+      return {status:500,response:err.message}
     }
   }
 
@@ -30,7 +30,7 @@ export class ClienteService {
    try{
     return {status:200,response: await this.clienteRepository.findAndCount({take:pagination.take,skip:pagination.skip})}
     }catch(err){
-      return {status:500,response:err}
+      return {status:500,response:err.message}
     } 
   }
 
@@ -38,15 +38,21 @@ export class ClienteService {
     try{
       return {status:200,response: await this.clienteRepository.findOne({where: {"id_cliente":id},relations:{persona:true}})}
     }catch(err){
-      return {status:500,response:err}
+      return {status:500,response:err.message}
     }
   }
 
   async update(id: number, updateClienteDto: UpdateClienteDto) {
     try{
-      return {status:200,response: await this.clienteRepository.update(id,updateClienteDto)}
+      const persona= await this.personaService.update(id, updateClienteDto.persona);
+      if(persona.status==200) {
+
+        return {status:200,response: await this.clienteRepository.update(id,updateClienteDto)}
+      }else{
+        return {status:500,response:persona.response}
+      }
     }catch(err){
-      return {status:500,response:err}
+      return {status:500,response:err.message}
     }
   }
 
@@ -55,7 +61,7 @@ export class ClienteService {
       const cliente=await this.clienteRepository.findOne({where: {"id_cliente":id}})
       return {status:200,response: await this.clienteRepository.remove(cliente)}
     }catch(err){
-      return {status:500,response:err}
+      return {status:500,response:err.message}
     }
   }
 }
