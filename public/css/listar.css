@@ -1,0 +1,144 @@
+
+
+.content{
+margin-left: 5rem;
+margin-top: 2rem;
+display: flex;
+flex-wrap:wrap;
+gap: 16px;
+
+}
+
+
+@charset "utf-8";
+.tarjeta{
+margin-bottom: 30px;
+display:flex;
+flex-direction:column;
+justify-content:space-between;
+width: auto;
+border: 1px solid lightgray;
+box-shadow: 2px 2px 8px 4px #d3d3d3d1;
+border-radius:15px;
+font-family: sans-serif;
+}
+
+
+
+.titulo{
+font-size: 20px;
+padding: 10px 10px 0 10px;;
+}
+
+.base{
+background: #e3587b;
+border-radius:0 0 15px 15px;
+padding: 10px;
+}
+.base a{
+text-decoration: none;
+color: white;
+}
+.base a:after {
+position: absolute;
+top: 0;
+right: 0;
+bottom: 0;
+left: 0;
+z-index: 1;
+content: ""
+}
+
+.tarjeta input{
+	position: absolute;
+	opacity: 0;
+	cursor: pointer;
+}
+
+
+.content.off{
+    opacity: 0.1;
+    visibility: hidden;
+}
+
+footer {
+	font-size: 20;
+position: fixed;
+  width: 100%;
+  text-align: center;
+  padding: 3px;
+  background-color: #ff0000;
+  color: white;
+  height:60px;
+  bottom: 0;
+}
+
+.cuerpo{
+padding: 10px;
+flex: 1 1 100%;
+}
+
+footer a{
+  color: white;
+	text-decoration: none;
+}
+
+.opciones{
+	display: flex;
+	margin-left: 5rem;
+}
+
+.boton{
+    text-decoration: none;
+    padding: 10px;
+    font-weight: 600;
+    font-size: 20px;
+    color: #fff;
+    border-radius: 6px;
+  }
+
+  .registrar{
+  	padding: 10px;
+    font-weight: 600;
+    font-size: 20px;
+  	text-decoration: none;
+    color: black;
+    border-radius: 6px;
+    border: 2px solid green;
+  }
+
+  .btn{
+    text-decoration: none;
+    margin-bottom: 5px;
+    display: flex;
+   	padding: 10px;
+    font-weight: 600;
+    font-size: 20px;
+  	text-decoration: none;
+    color: black;
+    border: 1px solid lightgray;
+    box-shadow: 2px 2px 8px 4px #d3d3d3d1;
+    border-radius: 15px;
+  }
+
+  .btn:hover{
+    color: white;
+    background-color: red;
+    opacity: 0.4;
+
+  }
+  .enunciado{
+    margin-left: 5rem;
+    margin-top: 2rem;
+    display: flex;
+  }
+
+
+
+ .boton2{
+ 	padding: 10px;
+    font-weight: 600;
+    font-size: 20px;
+ 	position: fixed;
+ 	right: 10;
+  }
