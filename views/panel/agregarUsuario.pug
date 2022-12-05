@@ -12,7 +12,7 @@ head
 header.header
   nav.nav
     .logo
-      a(href='#')
+      a(href='/administrador/panel')
         img(src='/img/logo.png' width='80' height='80')
     .exit
       a.salir(href='#')
@@ -33,14 +33,14 @@ header.header
           a.menu-link(href='#') Administrador
           ul.menu-submenu
             li
-              a.nav1.exit(href='#') Registrar Segundo Admin
+              a.nav1.exit(href='/administrador/panel/usuario') Registrar Segundo Admin
             li
-              a.nav1.exit(href='#') Lista Admins
-            li
-              a.nav1.exit(href='#') Vincular Redes
+              a.nav1.exit(href='/administrador/panel/listar') Lista Admins
+            //- li
+            //-   a.nav1.exit(href='#') Vincular Redes
         li#nav1.exit
           span.icon-plus
-          a.menu-link(href='#') Recuperar Contrase&ntilde;a
+          a.menu-link(href='/persona/recuperar') Recuperar Contrase&ntilde;a
 h2.enunciado.content Agregar Usuario Secundario
 .content
   form(action='' method='POST')
