@@ -14,7 +14,7 @@ export class PreguntaController {
   }
 
   @Put()
-  findAll(pagination:Pagination) {
+  findAll(@Body() pagination:Pagination) {
     return this.preguntaService.findAll(pagination);
   }
 

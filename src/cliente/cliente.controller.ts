@@ -14,7 +14,7 @@ export class ClienteController {
   }
 
   @Put()
-  findAll(pagination:Pagination) {
+  findAll(@Body() pagination:Pagination) {
     return this.clienteService.findAll(pagination);
   }
 

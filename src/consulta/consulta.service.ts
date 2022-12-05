@@ -14,7 +14,7 @@ export class ConsultaService {
     try{
       return {status:200,response: await this.consultaRepository.save(this.consultaRepository.create(createConsultaDto))}
     }catch(err){
-      return {status:500,response:err}
+      return {status:500,response:err.message}
     }    
   }
 
@@ -22,7 +22,7 @@ export class ConsultaService {
     try{
       return {status:200,response: await this.consultaRepository.findAndCount({take:pagination.take,skip:pagination.skip})}
     }catch(err){
-      return {status:500,response:err}
+      return {status:500,response:err.message}
     }
   }
 
@@ -30,7 +30,7 @@ export class ConsultaService {
     try{
       return {status:200,response: await this.consultaRepository.findOne({where:{"id":id},relations:{cliente:true}})}
     }catch(err){
-      return {status:500,response:err}
+      return {status:500,response:err.message}
     }
   }
 
@@ -38,7 +38,7 @@ export class ConsultaService {
     try{
       return {status:200,response: await this.consultaRepository.update(id,updateConsultaDto)}
     }catch(err){
-      return {status:500,response:err}
+      return {status:500,response:err.message}
     }
   }
 
@@ -47,7 +47,7 @@ export class ConsultaService {
       const consulta= await this.consultaRepository.findOne({where:{"id":id}})
       return {status:200,response: await this.consultaRepository.remove(consulta)}
     }catch(err){
-      return {status:500,response:err}
+      return {status:500,response:err.message}
     }
   }
 }

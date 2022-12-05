@@ -14,7 +14,7 @@ export class ConsultaController {
   }
 
   @Put()
-  findAll(pagination:Pagination) {
+  findAll(@Body() pagination:Pagination) {
     return this.consultaService.findAll(pagination);
   }
 

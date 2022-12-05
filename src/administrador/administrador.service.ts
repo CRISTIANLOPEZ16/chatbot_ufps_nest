@@ -22,7 +22,7 @@ export class AdministradorService {
         return {status:500,response: persona.response}
       }
     }catch(err){
-      return {status:500,response:err}
+      return {status:500,response:err.message}
     }
   }
 
@@ -30,7 +30,7 @@ export class AdministradorService {
     try{
       return {status:200,response: await this.administradorRepository.findAndCount({take:pagination.take,skip:pagination.skip})}
     }catch(err){
-      return {status:500,response:err}
+      return {status:500,response:err.message}
     }
   }
 
@@ -38,15 +38,20 @@ export class AdministradorService {
     try{
       return {status:200,response: await this.administradorRepository.findOne({where:{"id_administrador":id},relations:{persona:true}})}
     }catch(err){
-      return {status:500,response:err}
+      return {status:500,response:err.message}
     }
   }
 
   async update(id: number, updateAdministradorDto: UpdateAdministradorDto) {
     try{
-      return {status:200,response: await this.administradorRepository.update(id, updateAdministradorDto)}
+      const persona = await this.personaService.update(id, updateAdministradorDto.persona);
+      if(persona.status==200){
+        return {status:200,response: await this.administradorRepository.update(id, updateAdministradorDto)}
+      }else{
+        return {status:500,response:persona.response}
+      }
     }catch(err){
-      return {status:500,response:err}
+      return {status:500,response:err.message}
     }
   }
 
@@ -55,7 +60,7 @@ export class AdministradorService {
       const administrador=await this.administradorRepository.findOne({where:{"id_administrador":id}})
       return {status:200,response: await this.administradorRepository.remove(administrador)}
     }catch(err){
-      return {status:500,response:err}
+      return {status:500,response:err.message}
     }
   }
 }

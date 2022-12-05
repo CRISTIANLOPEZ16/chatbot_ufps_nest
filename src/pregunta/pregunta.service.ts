@@ -34,7 +34,7 @@ export class PreguntaService {
     try{
       return {status:200,response: await this.preguntaRepository.findAndCount({take:pagination.take,skip:pagination.skip})}
     }catch(err){
-      return {status:500,response:err}
+      return {status:500,response:err.message}
     }
   }
 
