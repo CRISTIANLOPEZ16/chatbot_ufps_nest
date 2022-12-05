@@ -5,12 +5,15 @@ head
   link(rel='icon' type='image/x-icon' href='/img/favicon.ico')
   meta(name='viewport' content='width=device-width, initial-scale=1')
   title Iniciar Sesi&oacute;n
-form(action='login/validar' method='POST')
+#formLogin
   h2 Iniciar Sesi&oacute;n
-  input(type='text' name='usuario' placeholder='👤 Usuario')
-  input(type='password' name='clave' placeholder='🔐 Contraseña')
-  input.login(type='submit' name='Ingresar' value='INGRESAR')
+  input(type='text' id='correo' name='usuario' placeholder='👤 Usuario')
+  input(type='password' id='password' name='clave' placeholder='🔐 Contraseña')
+  input#log.login(type='submit' name='Ingresar' value='INGRESAR')
 footer
+  script(src="/js/jquery.min.js") 
+  script(src="/js/login.js" type="module")
+  script(src="/js/sweetalert2.js") 
   p
     | &copy; 2022 Ing Sistemas
     br

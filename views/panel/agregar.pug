@@ -36,8 +36,6 @@ header.header
               a.nav1.exit(href='/administrador/panel/usuario') Registrar Segundo Admin
             li
               a.nav1.exit(href='/administrador/panel/listar') Lista Admins
-            //- li
-            //-   a.nav1.exit(href='#') Vincular Redes
         li#nav1.exit
           span.icon-plus
           a.menu-link(href='/persona/recuperar') Recuperar Contrase&ntilde;a
@@ -50,8 +48,11 @@ h2.enunciado.content Agregar Pregunta
     textarea#respuesta.area(placeholder='✔ Aguregue aquí su respuesta')
     .opciones
       .boton
-        a#recuperar.registrar(href='#') Agregar 
+        a#agregarPregunta.registrar(href='') Agregar 
 footer
+  script(src='/js/jquery.min.js')
+  script(src='/js/panel.js' type='module')
+  script(src='/js/sweetalert2.js')
   p
     | &copy; 2022 Ing Sistemas
     br
