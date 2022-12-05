@@ -11,10 +11,13 @@ $(document).on('click', '#log', function () {
             url: "http://localhost:3000/persona/log",
             dataType: "json",
             data: usuario,
-            async: false,
+            async: true,
             success: function (response) {
             console.log(response);
             datos = response;
+            },
+            error: function(xhr, status, error){
+                alerta('Debe ingresar un correo','error');
             },
         });
     }catch(e){

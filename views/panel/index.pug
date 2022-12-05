@@ -77,7 +77,9 @@ header.header
     a.editar(href='/administrador/panel/editar') Editar
     a.eliminar(href='#') Eliminar
 footer
-  script(src="../js/panel.js") 
+  script(src='/js/jquery.min.js')
+  script(src='/js/panel.js' type='module')
+  script(src='/js/sweetalert2.js')
   p
     | &copy; 2022 Ing Sistemas
     br
