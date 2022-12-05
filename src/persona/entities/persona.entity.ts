@@ -19,9 +19,6 @@ export class Persona {
     @Column({type: "varchar",length:100})
     password:string;
 
-    @Column({type: "varchar",length:100})
-    password:string;
-
     @Column({
         name: 'tipo_usuario',
         type: 'enum',
