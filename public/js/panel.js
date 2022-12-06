@@ -1,6 +1,6 @@
 import { alerta } from "./alerta.js";
 import { autoAlerta } from "./alerta.js";
-
+import { htmlAlerta } from "./alerta.js";
 var datos = "";
 
 $( document ).ready(function() {
@@ -63,3 +63,64 @@ $(document).on('click', '#agregarPregunta', function () {
     // }
 
 });
+
+
+$(document).on('click', '#masiva', function () {
+
+    let html=`<div class="container">
+                <h4>Registro de preguntas con Excell</h4><br>
+                <div class="panel panel-primary">
+                    <div class="panel-body">
+                        <!-- Input type file to upload excel file -->
+                        <input type="file" id="fileUpload" accept=".xls,.xlsx" /><br /><br>
+                        <button type="button" id="uploadExcel">Subir</button>
+
+                        <!-- Render parsed JSON data here -->
+                        <div style="margin-top:10px;">
+                            <pre id="jsonData"></pre>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            `;
+            Swal.fire({
+                title: '',
+                html: html,
+                showCancelButton: true,
+                showConfirmButton: false,
+                cancelButtonText: 'Cancelar',
+                })
+                var selectedFile;
+                    document.getElementById("fileUpload").addEventListener("change", function(event) {
+                        selectedFile = event.target.files[0];
+                      });
+                    document
+                      .getElementById("uploadExcel")
+                      .addEventListener("click", function() {
+                        if (selectedFile) {
+                          var fileReader = new FileReader();
+                          fileReader.onload = function(event) {
+                            var data = event.target.result;
+                
+                            var workbook = XLSX.read(data, {
+                              type: "binary"
+                            });
+                            workbook.SheetNames.forEach(sheet => {
+                              let rowObject = XLSX.utils.sheet_to_row_object_array(
+                                workbook.Sheets[sheet]
+                              );
+                              rowObject.forEach(element => {
+                                console.log(element.Pregunta);
+                              });
+                            });
+                          };
+                          fileReader.readAsBinaryString(selectedFile);
+                        }
+                      });
+            
+
+
+})
+
+
+

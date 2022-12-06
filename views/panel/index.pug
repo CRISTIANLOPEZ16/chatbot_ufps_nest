@@ -36,8 +36,6 @@ header.header
               a.nav1.exit(href='/administrador/panel/usuario') Registrar Segundo Admin
             li
               a.nav1.exit(href='/administrador/panel/listar') Lista Admins
-            //- li
-            //-   a.nav1.exit(href='#') Vincular Redes
         li#nav1.exit
           span.icon-plus
           a.menu-link(href='/persona/recuperar') Recuperar Contrase&ntilde;a
@@ -71,13 +69,16 @@ header.header
     .base
       span 22/06/2022
 .opciones
-  .boton
+  #agregar.boton
     a.registrar(href='/administrador/panel/agregar') Registrar Consulta
+  #masiva.boton
+    .registrar Carga Masiva
   .boton2
     a.editar(href='/administrador/panel/editar') Editar
     a.eliminar(href='#') Eliminar
 footer
   script(src='/js/jquery.min.js')
+  script(type='text/javascript' src='https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.15.3/xlsx.full.min.js')
   script(src='/js/panel.js' type='module')
   script(src='/js/sweetalert2.js')
   p
