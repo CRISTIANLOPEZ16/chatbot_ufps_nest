@@ -3,27 +3,54 @@ import { autoAlerta } from "./alerta.js";
 import { htmlAlerta } from "./alerta.js";
 var datos = "";
 
-$( document ).ready(function() {
+$( document ).ready( async function() {
     var datos = {
         "take":5,
         "skip":0
     }
-
-    try{
-        $.ajax({
-            type: "PUT",
-            url: "http://localhost:3000/pregunta",
-            dataType: "application/json",
-            data: datos,
-            async: false,
-            success: function (response) {
-            console.log(response);
-            datos = response;
-            },
+    var info='';
+    await fetch('http://localhost:3000/pregunta', {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(datos)
+      })
+        .then(response => response.json())
+        .then(data =>
+            info=data
+            )
+        .catch(error => console.error(error))
+        
+        let html=``;
+        info.response[0].forEach(element => {
+            html+=`<div class="tarjeta">
+            <label class="check" id="check">
+              <input id="cbox1" type="checkbox" value=""/><span class="checkmark"></span>
+            </label>
+            <div class="titulo">`+element.descripcion+`</div>
+            <div class="respuesta">`+element.consulta+`</div>
+            <div class="base"><span>22/06/2022</span></div>
+          </div>`;
         });
-    }catch(e){
-        alerta(e,"error");
-    }
+ 
+        $('#listado').html(html);
+
+    // try{
+    //     $.ajax({
+    //         type: "PUT",
+    //         url: "http://localhost:3000/pregunta",
+    //         dataType: "application/json",
+    //         data: datos,
+    //         async: false,
+    //         success: function (response) {
+    //         console.log(response);
+    //         datos = response;
+    //         },
+    //     });
+    // }catch(e){
+    //     alerta(e,"error");
+    // }
 
 });
 
@@ -40,21 +67,33 @@ $(document).on('click', '#agregarPregunta', function () {
         }
     }
 
-    try{
-        $.ajax({
-            type: "POST",
-            url: "http://localhost:3000/pregunta",
-            dataType: "application/json",
-            data: datos,
-            async: false,
-            success: function (response) {
-            console.log(response);
-            datos = response;
-            },
-        });
-    }catch(e){
-        alerta(e,"error");
-    }
+    fetch('http://localhost:3000/pregunta', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: datos
+      })
+        .then(response => response.json())
+        .then(data => console.log(data))
+        .catch(error => console.error(error))
+      
+
+    // try{
+    //     $.ajax({
+    //         type: "POST",
+    //         url: "http://localhost:3000/pregunta",
+    //         dataType: "application/json",
+    //         data: datos,
+    //         async: false,
+    //         success: function (response) {
+    //         console.log(response);
+    //         datos = response;
+    //         },
+    //     });
+    // }catch(e){
+    //     alerta(e,"error");
+    // }
 
     // if(datos.status==401){
     //     alerta(datos.response,'error');
