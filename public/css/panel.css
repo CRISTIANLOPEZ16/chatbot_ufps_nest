@@ -123,7 +123,7 @@ content: ""
 
 footer {
 	font-size: 20;
-position: fixed;
+  position: inherit;
   width: 100%;
   text-align: center;
   padding: 3px;
@@ -149,6 +149,8 @@ footer a{
 }
 
 .boton{
+    cursor: pointer;
+    display: flex;
     text-decoration: none;
     padding: 10px;
     font-weight: 600;
@@ -189,6 +191,8 @@ footer a{
   }
 
  .boton2{
+  cursor: pointer;
+  display: flex;
  	padding: 10px;
     font-weight: 600;
     font-size: 20px;

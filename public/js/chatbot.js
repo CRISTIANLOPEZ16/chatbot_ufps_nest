@@ -86,7 +86,23 @@ function transporte(data){
 
 function recibir(){
     var now = new Date(Date.now());
-    var hora = now.getHours() + ":" + now.getMinutes();
+    var hora ='';
+    if(now.getHours()<10){
+        hora+= '0'+now.getHours()+':';
+        if(now.getMinutes()<10){
+            hora+='0'+now.getMinutes();
+        }else{
+            hora+=now.getMinutes();
+        }
+    }else{
+        hora+=now.getHours()+':';
+        if(now.getMinutes()<10){
+            hora+='0'+now.getMinutes();
+        }else{
+            hora+=now.getMinutes();
+        }
+    }
+
     let userInput = $('#campo').val();
     mensajes.push(userInput);
     transporte(userInput);

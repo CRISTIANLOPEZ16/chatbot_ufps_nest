@@ -5,7 +5,7 @@ var datos = "";
 
 $( document ).ready( async function() {
     var datos = {
-        "take":5,
+        "take":10,
         "skip":0
     }
     var info='';
@@ -22,84 +22,63 @@ $( document ).ready( async function() {
             )
         .catch(error => console.error(error))
         
-        let html=``;
+        let html=`<h3>Listado de preguntas con sus Respuestas</h3><br>`;
         info.response[0].forEach(element => {
-            html+=`<div class="tarjeta">
-            <label class="check" id="check">
-              <input id="cbox1" type="checkbox" value=""/><span class="checkmark"></span>
-            </label>
-            <div class="titulo">`+element.descripcion+`</div>
-            <div class="respuesta">`+element.consulta+`</div>
-            <div class="base"><span>22/06/2022</span></div>
-          </div>`;
-        });
+          html+=`<div class="tarjeta">
+          <label class="check" id="check">
+            <input id="cbox1" type="checkbox" value="`+element.id+`"/><span class="checkmark"></span>
+          </label>
+          <div class="titulo">`+element.descripcion+`</div>
+          <div class="respuesta">`+element.Respuesta+`</div>
+          <div class="base"><span>22/06/2022</span></div>
+        </div>`;
+      });
  
         $('#listado').html(html);
-
-    // try{
-    //     $.ajax({
-    //         type: "PUT",
-    //         url: "http://localhost:3000/pregunta",
-    //         dataType: "application/json",
-    //         data: datos,
-    //         async: false,
-    //         success: function (response) {
-    //         console.log(response);
-    //         datos = response;
-    //         },
-    //     });
-    // }catch(e){
-    //     alerta(e,"error");
-    // }
-
 });
 
 
 
 
-$(document).on('click', '#agregarPregunta', function () {
-  
-    var datos = {"descripcion":$('#pregunta').val(),
-    "idConsulta": 1,
-        "consulta": {
-          "estado": "RESUELTA",
-          "idCliente": 1
-        }
-    }
+$(document).on('click', '#agregarPregunta', async function () {
 
-    fetch('http://localhost:3000/pregunta', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json'
+    var datos = 
+      {
+        "descripcion": $('#respuesta').val(),
+        "pregunta": {
+          "id": 0,
+          "descripcion": $('#pregunta').val(),
+          "idConsulta": 0,
+          "consulta": {
+            "estado": "RESUELTA"
+          }
         },
-        body: datos
-      })
-        .then(response => response.json())
-        .then(data => console.log(data))
-        .catch(error => console.error(error))
-      
+        "idPregunta": 0
+      }
+    try{
 
-    // try{
-    //     $.ajax({
-    //         type: "POST",
-    //         url: "http://localhost:3000/pregunta",
-    //         dataType: "application/json",
-    //         data: datos,
-    //         async: false,
-    //         success: function (response) {
-    //         console.log(response);
-    //         datos = response;
-    //         },
-    //     });
-    // }catch(e){
-    //     alerta(e,"error");
-    // }
+      var info='';
+      await fetch('http://localhost:3000/respuesta', {
+            method: 'POST',
+            headers: {
+            'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(datos)
+        })
+            .then(response => response.json())
+            .then(data =>
+                info=data
+                )
+            .catch(error => console.error(error))
 
-    // if(datos.status==401){
-    //     alerta(datos.response,'error');
-    // }else if(datos.status==200 || datos.status==201){
-    //     autoAlerta('Bienenido','success',1000,'/administrador/panel');
-    // }
+        if(info.status==401){
+            alerta(datos.response,'error');
+        }else if(info.status==200 || datos.status==201){
+            autoAlerta('Pregunta agregada correctamente!','success',5000,'/administrador/panel');
+        }
+      }catch(e){
+        alerta(e,"error");
+    }
 
 });
 
@@ -149,7 +128,40 @@ $(document).on('click', '#masiva', function () {
                                 workbook.Sheets[sheet]
                               );
                               rowObject.forEach(element => {
-                                console.log(element.Pregunta);
+                                
+                                    var datos = 
+                                    {
+                                      "descripcion": element.Respuesta,
+                                      "pregunta": {
+                                        "id": 0,
+                                        "descripcion": element.Pregunta,
+                                        "idConsulta": 0,
+                                        "consulta": {
+                                          "estado": "RESUELTA"
+                                        }
+                                      },
+                                      "idPregunta": 0
+                                    }
+                                  try{
+                              
+                                    var info='';
+                                    fetch('http://localhost:3000/respuesta', {
+                                          method: 'POST',
+                                          headers: {
+                                          'Content-Type': 'application/json'
+                                          },
+                                          body: JSON.stringify(datos)
+                                      })
+                                          .then(response => response.json())
+                                          .then(data =>
+                                              info=data
+                                              )
+                                          .catch(error => console.error(error))
+                                          autoAlerta('Preguntas agregadas correctamente!','success',5000,'/administrador/panel');
+                                    }catch(e){
+                                      alerta(e,"error");
+                                  }
+
                               });
                             });
                           };
@@ -163,3 +175,12 @@ $(document).on('click', '#masiva', function () {
 
 
 
+
+$(document).on('click', '#editar', async function () {
+
+  $("input[type=checkbox]:checked").each(function(){
+    //cada elemento seleccionado
+    console.log($(this).val());
+  });
+
+})

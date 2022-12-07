@@ -3,7 +3,15 @@ import { autoAlerta } from "./alerta.js";
 
 var datos = "";
 
-$(document).on('click', '#agregarUsuario', function () {
+
+$( document ).ready( async function() {
+    
+
+});
+
+
+
+$(document).on('click', '#agregarUsuario', async function () {
     var datos = {
         "persona": {
           "nombre": $('#nombres').val(),
@@ -15,26 +23,31 @@ $(document).on('click', '#agregarUsuario', function () {
       }
     
     try{
-        $.ajax({
-            type: "POST",
-            url: "http://localhost:3000/administrador",
-            dataType: "json",
-            data: datos,
-            async: false,
-            success: function (response) {
-            console.log(response);
-            datos = response;
+
+        var info='';
+        await fetch('http://localhost:3000/administrador', {
+            method: 'POST',
+            headers: {
+            'Content-Type': 'application/json'
             },
-        });
+            body: JSON.stringify(datos)
+        })
+            .then(response => response.json())
+            .then(data =>
+                info=data
+                )
+            .catch(error => console.error(error))
+        
+
+        if(info.status==401){
+            alerta(datos.response,'error');
+        }else if(info.status==200 || datos.status==201){
+            autoAlerta('Administrador '+$('#nombres').val()+ ' agregado correctamente!','success',5000,'/administrador/panel/listar');
+        }
     }catch(e){
         alerta(e,"error");
     }
 
-    if(datos.status==401){
-        alerta(datos.response,'error');
-    }else if(datos.status==200 || datos.status==201){
-        autoAlerta('Administrador'+$('#nombres').val()+ 'Agregado','success',5000,'/administrador/panel');
-    }
-    
-
 })
+
+
