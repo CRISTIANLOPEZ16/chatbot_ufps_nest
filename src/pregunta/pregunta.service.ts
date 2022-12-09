@@ -32,7 +32,7 @@ export class PreguntaService {
 
   async findAll(pagination:Pagination) {
     try{
-      return {status:200,response: await this.preguntaRepository.findAndCount({relations:{respuesta:true},take:pagination.take,skip:pagination.skip})}
+      return {status:200,response: await this.preguntaRepository.findAndCount({take:pagination.take,skip:pagination.skip})}
     }catch(err){
       return {status:500,response:err.message}
     }
@@ -40,7 +40,7 @@ export class PreguntaService {
 
   async findOne(id: number) {
     try{
-      return {status:200,response: await this.preguntaRepository.findOne({where:{"id":id},relations:{consulta:true,respuesta:true}})}
+      return {status:200,response: await this.preguntaRepository.findOne({where:{"id":id},relations:{consulta:true}})}
     }catch(err){
       return {status:500,response:err}
     }
