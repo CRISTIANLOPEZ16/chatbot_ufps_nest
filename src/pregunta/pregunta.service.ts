@@ -54,16 +54,6 @@ export class PreguntaService {
       return {status:500,response:err}
     }
   }
-  async search(texto:any){
-    try{
-      console.log(texto)
-      return {status:200,response: await this.preguntaRepository.createQueryBuilder("pregunta").where('MATCH(descripcion) AGAINST(:search IN BOOLEAN MODE)', {
-        search: texto,
-      }).getMany()}
-    }catch(err){
-      return {status:500,response:err}
-    }
-  }
 
   async remove(id: number) {
     try{
