@@ -48,7 +48,7 @@ export class AppService {
               }
               var preguntav : CreatePreguntaDto={
                 id: 0,
-                descripcion: '',
+                descripcion: texto.text,
                 idConsulta: 0,
                 consulta: consulta
               } 
