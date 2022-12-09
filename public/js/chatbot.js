@@ -35,7 +35,7 @@ $('input').keyup(function(e){
 function bienvenida(){
     var ajax=$.ajax({
         type:'POST',
-        url: 'https://ingsistemasufps.es/api/bot/',
+        url: '//localhost:3000/api/bot/',
         data:{'text':'hola'}
         })
     if(control==0){
@@ -43,7 +43,7 @@ function bienvenida(){
         ajax.done(function(response){
          let resp = response;
             if(resp.status==200){
-                mensaje(resp.message);
+                mensaje(resp.response);
                 
         }
         
@@ -61,13 +61,13 @@ function transporte(data){
         var ajax=$.ajax({
             headers:{"x-access-token": token},
             type:'POST',
-            url: 'https://ingsistemasufps.es/api/bot/',
+            url: '//localhost:3000/api/bot/',
             data:{'text':data}
             });    
     }else{
         var ajax=$.ajax({
             type:'POST',
-            url: 'https://ingsistemasufps.es/api/bot/',
+            url: '//localhost:3000/api/bot/',
             data:{'text':data}
             });
     }
@@ -78,7 +78,7 @@ function transporte(data){
                 if(resp?.token){
                     token = resp.token;
                 }
-               mensaje(resp.message); 
+               mensaje(resp.response); 
             }
             
         })
@@ -125,7 +125,22 @@ function typing(){
 
 function mensaje(mensaje2) {
     var now = new Date(Date.now());
-    var hora = now.getHours() + ":" + now.getMinutes();
+    var hora ='';
+    if(now.getHours()<10){
+        hora+= '0'+now.getHours()+':';
+        if(now.getMinutes()<10){
+            hora+='0'+now.getMinutes();
+        }else{
+            hora+=now.getMinutes();
+        }
+    }else{
+        hora+=now.getHours()+':';
+        if(now.getMinutes()<10){
+            hora+='0'+now.getMinutes();
+        }else{
+            hora+=now.getMinutes();
+        }
+    }
     $( ".typing_loader" ).remove();
     let temp='';
     temp =`<div class="income-msg">

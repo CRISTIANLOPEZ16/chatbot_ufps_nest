@@ -53,6 +53,8 @@ export class AppService {
         this.clienteService.create(cliente);
       }
     } catch (err) {
+      
+      console.log(process.env.GOOGLE_APPLICATION_CREDENTIALS);
       return { status: 500, response: err };
     }
   }
