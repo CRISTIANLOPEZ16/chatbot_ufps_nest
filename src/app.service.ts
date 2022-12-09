@@ -52,6 +52,7 @@ export class AppService {
           persona: persona,
         };
         this.clienteService.create(cliente);
+        return { status: 200, response:"Gracias por registrarte, te contactaremos cuando este lista tu pregunta"};
       }
     } catch (err) {
       const intent:any = await connection.detectIntent('chatbot-354104','1234567','sin respuesta','es');
