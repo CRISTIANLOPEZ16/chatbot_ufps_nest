@@ -55,10 +55,25 @@ content: ""
 	cursor: pointer;
 }
 
+.act{
+  cursor: pointer;
+  padding: 2px;
+  font-weight: 600;
+  font-size: 20px;
+  text-decoration: none;
+  color: black;
+  border-radius: 6px;
+  border: 2px solid rgb(66, 69, 249);
+}
 
 .content.off{
     opacity: 0.1;
     visibility: hidden;
+}
+
+.opciones.off{
+  opacity: 0.1;
+  visibility: hidden;
 }
 
 footer {

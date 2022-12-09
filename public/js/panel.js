@@ -9,7 +9,7 @@ $(document).ready(async function () {
     skip: 0,
   };
   var info = '';
-  await fetch('http://localhost:3000/pregunta', {
+  await fetch('http://ingsistemasufps.es/respuesta', {
     method: 'PUT',
     headers: {
       'Content-Type': 'application/json',
@@ -29,13 +29,13 @@ $(document).ready(async function () {
       element.id +
       `"/><span class="checkmark"></span>
           </label>
-          <div class="titulo">` +
+          <div id="p-`+element.id+`" class="titulo">` +
+      element.pregunta.descripcion +
+      `</div>
+          <div id="r-`+element.id+`" class="respuesta">` +
       element.descripcion +
       `</div>
-          <div class="respuesta">` +
-      element.Respuesta +
-      `</div>
-          <div class="base"><span>22/06/2022</span></div>
+          <div class="base"><div class="botone"><div class="editar" id="editar" data-id="`+element.id+`">Editar</div></div></div>
         </div>`;
   });
 
@@ -57,7 +57,7 @@ $(document).on('click', '#agregarPregunta', async function () {
   };
   try {
     var info = '';
-    await fetch('http://localhost:3000/respuesta', {
+    await fetch('http://ingsistemasufps.es/respuesta', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -74,10 +74,18 @@ $(document).on('click', '#agregarPregunta', async function () {
       autoAlerta(
         'Pregunta agregada correctamente!',
         'success',
-        5000,
+        3000,
         '/administrador/panel',
       );
     }
+
+    autoAlerta(
+      'Pregunta agregada correctamente!',
+      'success',
+      3000,
+      '/administrador/panel',
+    );
+
   } catch (e) {
     alerta(e, 'error');
   }
@@ -141,7 +149,7 @@ $(document).on('click', '#masiva', function () {
             };
             try {
               var info = '';
-              fetch('http://localhost:3000/respuesta', {
+              fetch('http://ingsistemasufps.es/respuesta', {
                 method: 'POST',
                 headers: {
                   'Content-Type': 'application/json',
@@ -154,7 +162,7 @@ $(document).on('click', '#masiva', function () {
               autoAlerta(
                 'Preguntas agregadas correctamente!',
                 'success',
-                5000,
+                3000,
                 '/administrador/panel',
               );
             } catch (e) {
@@ -169,8 +177,124 @@ $(document).on('click', '#masiva', function () {
 });
 
 $(document).on('click', '#editar', async function () {
+
+  let id=$(this).attr("data-id");
+    let html = `<div class="container">
+                  <h4>Editar Pregunta </h4><br>
+                  <form action="" method="POST">
+                    <label>Pregunta:</label>
+                    <textarea cols="40" rows="8" class="area" id="pregunta" placeholder="">`+$('#p-'+id).html()+`</textarea><br>
+                    <label>Respuesta:</label>
+                    <textarea cols="40" rows="8" class="area" id="respuesta" placeholder="">`+$('#r-'+id).html()+`</textarea>
+                    <div class="opciones">
+                      <div class="boton"><a class="registrar" data-id="`+id+`" id="actualizar" href="#">Guardar </a></div>
+                    </div>
+                  </form>
+              </div>
+              `;
+    Swal.fire({
+      title: '',
+      html: html,
+      showCancelButton: true,
+      showConfirmButton: false,
+      cancelButtonText: 'Cancelar',
+    });
+
+  
+});
+
+
+$(document).on('click', '#eliminar', async function () {
   $('input[type=checkbox]:checked').each(function () {
-    //cada elemento seleccionado
-    console.log($(this).val());
+    
+    try {
+      var info = '';
+      let url='http://ingsistemasufps.es/pregunta/'+$(this).val();
+
+      fetch(url, {
+        method: 'DELETE',
+        headers: {
+          'Content-Type': 'application/json',
+        }
+      })
+        .then((response) => response.json())
+        .then((data) => (info = data))
+        .catch((error) => console.error(error));
+      autoAlerta(
+        'Elimimadas correctamente!',
+        'success',
+        2000,
+        '/administrador/panel',
+      );
+    } catch (e) {
+      alerta(e, 'error');
+    }
+
   });
+
+});
+
+
+$(document).on('click', '#actualizar', async function () {
+  var datos = {
+    descripcion: $('#respuesta').val(),
+    pregunta: {
+      id: $(this).attr("data-id"),
+      descripcion: $('#pregunta').val(),
+      idConsulta: $(this).attr("data-id"),
+      consulta: {
+        estado: 'RESUELTA',
+      },
+    }
+  };
+  try {
+    let url='http://ingsistemasufps.es/respuesta/'+$(this).attr("data-id");
+    var info = '';
+    await fetch(url, {
+      method: 'PATCH',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(datos),
+    })
+      .then((response) => response.json())
+      .then((data) => (info = data))
+      .catch((error) => console.error(error));
+
+    if (info.status == 401) {
+      alerta(datos.response, 'error');
+    }else if (info.status == 200 || datos.status == 201) {
+   
+      var datos = {
+          id: $(this).attr("data-id"),
+          descripcion: $('#pregunta').val()
+        };
+
+      let url2='http://ingsistemasufps.es/pregunta/'+$(this).attr("data-id");
+      var info = '';
+      await fetch(url2, {
+        method: 'PATCH',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(datos),
+      })
+        .then((response) => response.json())
+        .then((data) => (info = data))
+        .catch((error) => console.error(error));
+  
+      if (info.status == 401) {
+        alerta(datos.response, 'error');
+      }else if (info.status == 200 || datos.status == 201) {
+        autoAlerta(
+          'Pregunta actualizada correctamente!',
+          'success',
+          3000,
+          '/administrador/panel',
+        );
+     }
+    }
+  } catch (e) {
+    alerta(e, 'error');
+  }
 });

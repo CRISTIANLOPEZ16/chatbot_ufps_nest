@@ -47,15 +47,16 @@ export class AppService {
           tipoUsuario: tipoUsuario.CLIENTE,
         };
         const cliente: CreateClienteDto = {
-          codigo: '',
-          idCliente: intent.queryResult.parameters.fields.codigo.numberValue,
+          codigo: intent.queryResult.parameters.fields.codigo.numberValue,
+          idCliente: 0,
           persona: persona,
         };
         this.clienteService.create(cliente);
         return { status: 200, response:"Gracias por registrarte, te contactaremos cuando este lista tu pregunta"};
       }
     } catch (err) {
-      const intent:any = await connection.detectIntent('chatbot-354104','1234567','sin respuesta','es');
+      console.log(err)
+      const intent:any = await connection.detectIntent('chatbotufps','1234567','sin respuesta','es');
       return { status: 200, response: intent.queryResult.fulfillmentText };
     }
   }

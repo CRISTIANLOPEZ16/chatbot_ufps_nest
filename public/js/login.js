@@ -8,7 +8,7 @@ $(document).on('click', '#log', function () {
     try{
         $.ajax({
             type: "POST",
-            url: "http://localhost:3000/persona/log",
+            url: "http://ingsistemasufps.es/persona/log",
             dataType: "json",
             data: usuario,
             async: true,

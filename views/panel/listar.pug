@@ -15,7 +15,7 @@ header.header
       a(href='/administrador/panel')
         img(src='/img/logo.png' width='80' height='80')
     .exit
-      a.salir(href='#')
+      a.salir(href='/')
         | Salir 
         i.out.fa-solid.fa-right-from-bracket.out
   .vertical-nav
@@ -27,7 +27,7 @@ header.header
       ul.menu-list
         li#nav1.exit
           span.icon-plus
-          a.menu-link(href='#') Historico
+          a.menu-link(href='/administrador/panel') Preguntas
         li#nav1.exit
           span.icon-plus
           a.menu-link(href='#') Administrador
@@ -43,20 +43,6 @@ header.header
           a.menu-link(href='/persona/recuperar') Recuperar Contrase&ntilde;a
 h2.enunciado.content Administradores Registrados
 #listado.content
-  .tarjeta
-    .titulo Felipe Cortez
-    .cuerpo
-      .boton
-        a.btn(href='#') Editar
-        a.btn(href='#') Eliminar
-        a.btn(href='#') Agregar Permisos
-  .tarjeta
-    .titulo Alicia Margo
-    .cuerpo
-      .boton
-        a.btn(href='#') Editar
-        a.btn(href='#') Eliminar
-        a.btn(href='#') Agregar Permisos
 .opciones
   .boton
     a.registrar(href='/administrador/panel/usuario') Registrar Administrador

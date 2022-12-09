@@ -50,6 +50,7 @@ export class PreguntaService {
     try{
       return {status:200,response: await this.preguntaRepository.update(id, updatePreguntaDto)}
     }catch(err){
+      console.log(err)
       return {status:500,response:err}
     }
   }
