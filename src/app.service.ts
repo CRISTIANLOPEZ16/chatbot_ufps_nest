@@ -7,7 +7,7 @@ export class AppService {
   constructor(private readonly preguntaService:PreguntaService){}
   async getDialog(texto: any) {
     try{
-      let intent:any = await connection.detectIntent('chatbot-354104','1234567',texto.text,'es');
+      let intent:any = await connection.detectIntent('ufps-rwvh','1234567',texto.text,'es');
       if(intent.queryResult.intent.displayName=="Saludo"){
         return {status:200,response:intent.queryResult.fulfillmentText}
     }else{
