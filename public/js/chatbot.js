@@ -35,7 +35,7 @@ $('input').keyup(function(e){
 function bienvenida(){
     var ajax=$.ajax({
         type:'POST',
-        url: '//localhost:3000/api/bot/',
+        url: '//ingsistemasufps.es/api/bot/',
         data:{'text':'hola'}
         })
     if(control==0){
@@ -61,13 +61,13 @@ function transporte(data){
         var ajax=$.ajax({
             headers:{"x-access-token": token},
             type:'POST',
-            url: '//localhost:3000/api/bot/',
+            url: '//ingsistemasufps.es/api/bot/',
             data:{'text':data}
             });    
     }else{
         var ajax=$.ajax({
             type:'POST',
-            url: '//localhost:3000/api/bot/',
+            url: '//ingsistemasufps.es/api/bot/',
             data:{'text':data}
             });
     }

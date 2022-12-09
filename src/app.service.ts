@@ -47,13 +47,14 @@ export class AppService {
           tipoUsuario: tipoUsuario.CLIENTE,
         };
         const cliente: CreateClienteDto = {
-          codigo: '',
-          idCliente: intent.queryResult.parameters.fields.codigo.numberValue,
+          codigo: intent.queryResult.parameters.fields.codigo.numberValue,
+          idCliente: 0,
           persona: persona,
         };
         this.clienteService.create(cliente);
       }
     } catch (err) {
+      console.log(err)
       const intent:any = await connection.detectIntent('chatbotufps','1234567','sin respuesta','es');
       return { status: 200, response: intent.queryResult.fulfillmentText };
     }

@@ -9,7 +9,7 @@ $(document).ready(async function () {
     skip: 0,
   };
   var info = '';
-  await fetch('http://localhost:3000/respuesta', {
+  await fetch('http://ingsistemasufps.es/respuesta', {
     method: 'PUT',
     headers: {
       'Content-Type': 'application/json',
@@ -57,7 +57,7 @@ $(document).on('click', '#agregarPregunta', async function () {
   };
   try {
     var info = '';
-    await fetch('http://localhost:3000/respuesta', {
+    await fetch('http://ingsistemasufps.es/respuesta', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -85,7 +85,7 @@ $(document).on('click', '#agregarPregunta', async function () {
       3000,
       '/administrador/panel',
     );
-    
+
   } catch (e) {
     alerta(e, 'error');
   }
@@ -149,7 +149,7 @@ $(document).on('click', '#masiva', function () {
             };
             try {
               var info = '';
-              fetch('http://localhost:3000/respuesta', {
+              fetch('http://ingsistemasufps.es/respuesta', {
                 method: 'POST',
                 headers: {
                   'Content-Type': 'application/json',
@@ -209,7 +209,7 @@ $(document).on('click', '#eliminar', async function () {
     
     try {
       var info = '';
-      let url='http://localhost:3000/pregunta/'+$(this).val();
+      let url='http://ingsistemasufps.es/pregunta/'+$(this).val();
 
       fetch(url, {
         method: 'DELETE',
@@ -248,7 +248,7 @@ $(document).on('click', '#actualizar', async function () {
     }
   };
   try {
-    let url='http://localhost:3000/respuesta/'+$(this).attr("data-id");
+    let url='http://ingsistemasufps.es/respuesta/'+$(this).attr("data-id");
     var info = '';
     await fetch(url, {
       method: 'PATCH',
@@ -270,7 +270,7 @@ $(document).on('click', '#actualizar', async function () {
           descripcion: $('#pregunta').val()
         };
 
-      let url2='http://localhost:3000/pregunta/'+$(this).attr("data-id");
+      let url2='http://ingsistemasufps.es/pregunta/'+$(this).attr("data-id");
       var info = '';
       await fetch(url2, {
         method: 'PATCH',

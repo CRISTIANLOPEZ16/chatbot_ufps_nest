@@ -25,7 +25,7 @@ $(document).on('click', '#agregarUsuario', async function () {
     try{
 
         var info='';
-        await fetch('http://localhost:3000/administrador', {
+        await fetch('http://ingsistemasufps.es/administrador', {
             method: 'POST',
             headers: {
             'Content-Type': 'application/json'
