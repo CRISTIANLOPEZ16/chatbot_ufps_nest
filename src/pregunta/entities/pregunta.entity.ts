@@ -7,10 +7,6 @@ export class Pregunta {
     @OneToOne(()=>Consulta)
     @JoinColumn({name:"id_consulta"})
     consulta:Consulta;
-
-    @OneToOne(()=>Respuesta,{ eager: true, onDelete: 'CASCADE' })
-    @JoinColumn({name:"id_respuesta"})
-    respuesta:Respuesta;
     
     @RelationId((pregunta:Pregunta)=>pregunta.consulta)
     id_consulta:number;
