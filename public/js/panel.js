@@ -35,7 +35,7 @@ $(document).ready(async function () {
           <div class="respuesta">` +
       element.Respuesta +
       `</div>
-          <div class="base"><span>22/06/2022</span></div>
+          <div class="base"><div class="botone"><div class="editar" id="editar" data-id="`+element.id+`">Editar</div></div></div>
         </div>`;
   });
 
@@ -173,4 +173,38 @@ $(document).on('click', '#editar', async function () {
     //cada elemento seleccionado
     console.log($(this).val());
   });
+
+  console.log($(this).attr("data-id"));
 });
+
+
+$(document).on('click', '#eliminar', async function () {
+  $('input[type=checkbox]:checked').each(function () {
+    
+    try {
+      var info = '';
+      let url='http://localhost:3000/pregunta/'+$(this).val();
+
+      fetch(url, {
+        method: 'DELETE',
+        headers: {
+          'Content-Type': 'application/json',
+        }
+      })
+        .then((response) => response.json())
+        .then((data) => (info = data))
+        .catch((error) => console.error(error));
+      autoAlerta(
+        'Elimimadas correctamente!',
+        'success',
+        5000,
+        '/administrador/panel',
+      );
+    } catch (e) {
+      alerta(e, 'error');
+    }
+
+  });
+
+});
+

@@ -61,6 +61,11 @@ content: ""
     visibility: hidden;
 }
 
+.opciones.off{
+  opacity: 0.1;
+  visibility: hidden;
+}
+
 footer {
 	font-size: 20;
 position: fixed;

@@ -1,66 +1,70 @@
-<head>
-  <meta charset="utf-8"/>
-  <meta name="viewport" content="width=device-width, initial-scale=1"/>
-  <title>Panel de Administraci&oacute;n</title>
-  <link rel="stylesheet" type="text/css" href="/css/navbar.css"/>
-  <link rel="stylesheet" type="text/css" href="/css/agregarU.css"/>
-  <link rel="icon" type="image/x-icon" href="/img/favicon.ico"/>
-  <script src="https://code.jquery.com/jquery-3.1.1.min.js" integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=" crossorigin="anonymous"></script>
-  <script src="/js/navbar.js"></script>
-  <meta name="viewport" content="width=device-width, initial-scale=1"/>
-  <script src="https://kit.fontawesome.com/6ee540ddc5.js" crossorigin="anonymous"></script>
-</head>
-<header class="header">
-  <nav class="nav">
-    <div class="logo"><a href="/administrador/panel"><img src="/img/logo.png" width="80" height="80"/></a></div>
-    <div class="exit"><a class="salir" href="#">Salir <i class="out fa-solid fa-right-from-bracket out"></i></a></div>
-  </nav>
-  <div class="vertical-nav"><a href="#"><i class="menu fa-solid fa-bars" id="menu"></i></a></div>
-  <div class="sidebar" id="sidebar">
-    <div class="cont">
-      <h2>MENU</h2>
-      <ul class="menu-list">
-        <li class="exit" id="nav1"><span class="icon-plus"></span><a class="menu-link" href="#">Historico</a></li>
-        <li class="exit" id="nav1"><span class="icon-plus"></span><a class="menu-link" href="#">Administrador</a>
-          <ul class="menu-submenu">
-            <li><a class="nav1 exit" href="/administrador/panel/usuario">Registrar Segundo Admin</a></li>
-            <li><a class="nav1 exit" href="/administrador/panel/listar">Lista Admins</a></li>
-          </ul>
-        </li>
-        <li class="exit" id="nav1"><span class="icon-plus"></span><a class="menu-link" href="/persona/recuperar">Recuperar Contrase&ntilde;a</a></li>
-      </ul>
-    </div>
-  </div>
-</header>
-<h2 class="enunciado content">Agregar Usuario Secundario</h2>
-<div class="content">
-  <form action="" method="POST">
-    <div class="ventana">
-      <div class="left">
-        <label>Nombres:</label>
-        <input id="nombres" type="text" placeholder="Nombres"/>
-        <label>Apellidos:</label>
-        <input id="apellidos" type="text" placeholder="Apellidos"/>
-        <label>Correo:</label>
-        <input id="correo" type="text" placeholder="Email"/>
-      </div>
-      <div class="right">
-        <label>Codigo:</label>
-        <input id="codigo" type="text" placeholder="Codigo"/>
-        <label>Fecha de Nacimiento:</label>
-        <input id="fecha" type="date" value="2008-01-01" min="1950-01-01" max="2008-01-01"/>
-        <label>Clave:</label>
-        <input id="password" type="password" placeholder="Contraseña"/>
-      </div>
-    </div>
-    <div class="opciones">
-      <div class="boton"><a class="registrar" id="agregarUsuario" href="#">Agregar </a></div>
-    </div>
-  </form>
-</div>
-<footer>
-  <script src="/js/jquery.min.js"></script>
-  <script src="/js/panelUsuario.js" type="module"></script>
-  <script src="/js/sweetalert2.js"></script>
-  <p>&copy; 2022 Ing Sistemas<br/><a href="https://sites.google.com/ufps.edu.co/chatbot/" target="_blank">Contactanos</a></p>
-</footer>
+head
+  meta(charset='utf-8')
+  meta(name='viewport' content='width=device-width, initial-scale=1')
+  title Panel de Administraci&oacute;n
+  link(rel='stylesheet' type='text/css' href='/css/navbar.css')
+  link(rel='stylesheet' type='text/css' href='/css/agregarU.css')
+  link(rel='icon' type='image/x-icon' href='/img/favicon.ico')
+  script(src='https://code.jquery.com/jquery-3.1.1.min.js' integrity='sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=' crossorigin='anonymous')
+  script(src='/js/navbar.js')
+  meta(name='viewport' content='width=device-width, initial-scale=1')
+  script(src='https://kit.fontawesome.com/6ee540ddc5.js' crossorigin='anonymous')
+header.header
+  nav.nav
+    .logo
+      a(href='/administrador/panel')
+        img(src='/img/logo.png' width='80' height='80')
+    .exit
+      a.salir(href='/')
+        | Salir 
+        i.out.fa-solid.fa-right-from-bracket.out
+  .vertical-nav
+    a(href='#')
+      i#menu.menu.fa-solid.fa-bars
+  #sidebar.sidebar
+    .cont
+      h2 MENU
+      ul.menu-list
+        li#nav1.exit
+          span.icon-plus
+          a.menu-link(href='#') Historico
+        li#nav1.exit
+          span.icon-plus
+          a.menu-link(href='#') Administrador
+          ul.menu-submenu
+            li
+              a.nav1.exit(href='/administrador/panel/usuario') Registrar Segundo Admin
+            li
+              a.nav1.exit(href='/administrador/panel/listar') Lista Admins
+        li#nav1.exit
+          span.icon-plus
+          a.menu-link(href='/persona/recuperar') Recuperar Contrase&ntilde;a
+h2.enunciado.content Agregar Usuario Secundario
+.content
+  form(action='' method='POST')
+    .ventana
+      .left
+        label Nombres:
+        input#nombres(type='text' placeholder='Nombres')
+        label Apellidos:
+        input#apellidos(type='text' placeholder='Apellidos')
+        label Correo:
+        input#correo(type='text' placeholder='Email')
+      .right
+        label Codigo:
+        input#codigo(type='text' placeholder='Codigo')
+        label Fecha de Nacimiento:
+        input#fecha(type='date' value='2008-01-01' min='1950-01-01' max='2008-01-01')
+        label Clave:
+        input#password(type='password' placeholder='Contraseña')
+    .opciones
+      .boton
+        a#agregarUsuario.registrar(href='#') Agregar 
+footer
+  script(src='/js/jquery.min.js')
+  script(src='/js/panelUsuario.js' type='module')
+  script(src='/js/sweetalert2.js')
+  p
+    | &copy; 2022 Ing Sistemas
+    br
+    a(href='https://sites.google.com/ufps.edu.co/chatbot/' target='_blank') Contactanos

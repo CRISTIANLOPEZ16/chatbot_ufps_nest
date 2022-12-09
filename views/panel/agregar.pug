@@ -15,7 +15,7 @@ header.header
       a(href='/administrador/panel')
         img(src='/img/logo.png' width='80' height='80')
     .exit
-      a.salir(href='#')
+      a.salir(href='/')
         | Salir 
         i.out.fa-solid.fa-right-from-bracket.out
   .vertical-nav
@@ -46,11 +46,18 @@ h2.enunciado.content Agregar Pregunta
     textarea#pregunta.area(placeholder='❔ Agregue aquí su pregunta')
     label Respuesta:
     textarea#respuesta.area(placeholder='✔ Aguregue aquí su respuesta')
-    .opciones
-      .boton
-        a#agregarPregunta.registrar(href='') Agregar 
+.opciones
+  #agregar.boton
+    a.registrar(href='/administrador/panel/agregar') Registrar Consulta
+  #masiva.boton
+    .registrar Carga Masiva
+  .boton
+    #editar.editar Editar
+  .boton
+    #eliminar.eliminar Eliminar
 footer
   script(src='/js/jquery.min.js')
+  script(type='text/javascript' src='https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.15.3/xlsx.full.min.js')
   script(src='/js/panel.js' type='module')
   script(src='/js/sweetalert2.js')
   p
