@@ -34,7 +34,7 @@ export class AppService {
         const respuestas= await this.respuestaService.search(
           intent.queryResult.parameters.fields.any.listValue.values[0]
             .stringValue)
-            if(respuestas.response.length > 0 || respuestas.response!=null) {
+            if(respuestas.response.length > 0 && respuestas.response!=null) {
               return {
                 status: 200,
                 response: respuestas,
