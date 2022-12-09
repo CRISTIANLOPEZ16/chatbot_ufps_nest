@@ -65,7 +65,7 @@ export class RespuestaService {
       console.log(texto)
       return {status:200,response: await this.respuestaRepository.createQueryBuilder("respuesta").innerJoinAndSelect('respuesta.pregunta','pregunta').where('MATCH(pregunta.descripcion) AGAINST(:search IN BOOLEAN MODE)', {
         search: texto,
-      }).getMany()}
+      }).getOne()}
     }catch(err){
       return {status:500,response:err}
     }

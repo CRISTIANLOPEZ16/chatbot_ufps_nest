@@ -46,6 +46,7 @@
     bottom: 93px;
     animation: animacion ease 3s backwards; 
     animation-delay: 2s;
+    z-index: 99999;
 }
 .text.chat{
     visibility: hidden;

@@ -78,7 +78,13 @@ function transporte(data){
                 if(resp?.token){
                     token = resp.token;
                 }
-               mensaje(resp.response); 
+                if(resp.response.response!=undefined){
+                    mensaje(resp.response.response.descripcion); 
+                }else{
+                    mensaje(resp.response); 
+                }
+            }else if(resp.status==500){
+                mensaje("No pudimos encontrar tu pregunta, intenta más tarde"); 
             }
             
         })

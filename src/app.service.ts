@@ -54,9 +54,8 @@ export class AppService {
         this.clienteService.create(cliente);
       }
     } catch (err) {
-      
-      console.log(process.env.GOOGLE_APPLICATION_CREDENTIALS);
-      return { status: 500, response: err };
+      const intent:any = await connection.detectIntent('chatbotufps','1234567','sin respuesta','es');
+      return { status: 200, response: intent.queryResult.fulfillmentText };
     }
   }
 }
