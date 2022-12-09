@@ -9,7 +9,7 @@ $(document).ready(async function () {
     skip: 0,
   };
   var info = '';
-  await fetch('http://ingsistemasufps.es/persona', {
+  await fetch('//ingsistemasufps.es/persona', {
     method: 'PUT',
     headers: {
       'Content-Type': 'application/json',
@@ -42,7 +42,7 @@ $(document).ready(async function () {
 $(document).on('click', '#eliminar', async function () { 
     try {
       var info = '';
-      let url='http://ingsistemasufps.es/administrador/'+$(this).attr("data-id");
+      let url='//ingsistemasufps.es/administrador/'+$(this).attr("data-id");
 
       await fetch(url, {
         method: 'DELETE',
@@ -54,7 +54,7 @@ $(document).on('click', '#eliminar', async function () {
         .then((data) => (info = data))
         .catch((error) => console.error(error));
 
-      url='http://ingsistemasufps.es/persona/'+$(this).attr("data-id");
+      url='//ingsistemasufps.es/persona/'+$(this).attr("data-id");
 
       await fetch(url, {
         method: 'DELETE',
@@ -119,7 +119,7 @@ $(document).on('click', '#actualizar', async function () {
     apellido: $('#apellidos').val()
   };
   try {
-    let url='http://ingsistemasufps.es/persona/'+$(this).attr("data-id");
+    let url='//ingsistemasufps.es/persona/'+$(this).attr("data-id");
     var info = '';
     await fetch(url, {
       method: 'PATCH',
