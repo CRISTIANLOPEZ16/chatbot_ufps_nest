@@ -8,7 +8,7 @@ export class Pregunta {
     @JoinColumn({name:"id_consulta"})
     consulta:Consulta;
 
-    @OneToOne(()=>Respuesta,{cascade:true})
+    @OneToOne(()=>Respuesta,{ eager: true, onDelete: 'CASCADE' })
     @JoinColumn({name:"id_respuesta"})
     respuesta:Respuesta;
     

@@ -6,7 +6,7 @@ export class Respuesta {
     @PrimaryGeneratedColumn()
     id:number
     
-    @OneToOne(()=>Pregunta,{cascade:true})
+    @OneToOne(()=>Pregunta,{ eager: true, onDelete: 'CASCADE' })
     @JoinColumn({name:"id_pregunta"})
     pregunta:Pregunta
 
