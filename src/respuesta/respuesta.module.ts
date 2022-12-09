@@ -8,6 +8,7 @@ import { PreguntaModule } from 'src/pregunta/pregunta.module';
 @Module({
   imports: [PreguntaModule,TypeOrmModule.forFeature([Respuesta])],
   controllers: [RespuestaController],
-  providers: [RespuestaService]
+  providers: [RespuestaService],
+  exports:[RespuestaService]
 })
 export class RespuestaModule {}

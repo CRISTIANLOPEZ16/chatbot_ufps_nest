@@ -5,11 +5,12 @@ import { connection } from './dialogFlow';
 import { CreatePersonaDto } from './persona/dto/persona.dto';
 import { tipoUsuario } from './persona/entities/persona.entity';
 import { PreguntaService } from './pregunta/pregunta.service';
+import { RespuestaService } from './respuesta/respuesta.service';
 
 @Injectable()
 export class AppService {
   constructor(
-    private readonly preguntaService: PreguntaService,
+    private readonly respuestaService: RespuestaService,
     private readonly clienteService: ClienteService,
   ) {}
   async getDialog(texto: any) {
@@ -28,7 +29,7 @@ export class AppService {
       } else if (intent.queryResult.intent.displayName == 'Identificar') {
         return {
           status: 200,
-          response: await this.preguntaService.search(
+          response: await this.respuestaService.search(
             intent.queryResult.parameters.fields.any.listValue.values[0]
               .stringValue,
           ),
