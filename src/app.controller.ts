@@ -11,7 +11,7 @@ export class AppController {
     return {message: 'Hello'}
   }
 
-  @Post()
+  @Post("api/bot")
   Dialog(@Body() texto:any){
     return this.appService.getDialog(texto)
   }

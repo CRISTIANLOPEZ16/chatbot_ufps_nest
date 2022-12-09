@@ -8,6 +8,7 @@ import { PersonaModule } from 'src/persona/persona.module';
 @Module({
   imports: [PersonaModule,TypeOrmModule.forFeature([Cliente])],
   controllers: [ClienteController],
-  providers: [ClienteService]
+  providers: [ClienteService],
+  exports:[ClienteService]
 })
 export class ClienteModule {}
