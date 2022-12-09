@@ -27,7 +27,6 @@ class Connection {
           projectId,
           sessionId
         );
-      
         // The text query request.
         let request = {
           session: sessionPath,
@@ -38,7 +37,6 @@ class Connection {
             },
           },
         };
-      
         let responses = await sessionClient.detectIntent(request);
         return responses[0];
       }
