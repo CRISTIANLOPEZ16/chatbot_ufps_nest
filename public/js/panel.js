@@ -9,7 +9,7 @@ $(document).ready(async function () {
     skip: 0,
   };
   var info = '';
-  await fetch('http://localhost:3000/pregunta', {
+  await fetch('http://localhost:3000/respuesta', {
     method: 'PUT',
     headers: {
       'Content-Type': 'application/json',
@@ -29,11 +29,11 @@ $(document).ready(async function () {
       element.id +
       `"/><span class="checkmark"></span>
           </label>
-          <div class="titulo">` +
-      element.descripcion +
+          <div id="p-`+element.id+`" class="titulo">` +
+      element.pregunta.descripcion +
       `</div>
-          <div class="respuesta">` +
-      element.Respuesta +
+          <div id="r-`+element.id+`" class="respuesta">` +
+      element.descripcion +
       `</div>
           <div class="base"><div class="botone"><div class="editar" id="editar" data-id="`+element.id+`">Editar</div></div></div>
         </div>`;
@@ -74,10 +74,18 @@ $(document).on('click', '#agregarPregunta', async function () {
       autoAlerta(
         'Pregunta agregada correctamente!',
         'success',
-        5000,
+        3000,
         '/administrador/panel',
       );
     }
+
+    autoAlerta(
+      'Pregunta agregada correctamente!',
+      'success',
+      3000,
+      '/administrador/panel',
+    );
+    
   } catch (e) {
     alerta(e, 'error');
   }
@@ -154,7 +162,7 @@ $(document).on('click', '#masiva', function () {
               autoAlerta(
                 'Preguntas agregadas correctamente!',
                 'success',
-                5000,
+                3000,
                 '/administrador/panel',
               );
             } catch (e) {
@@ -169,12 +177,30 @@ $(document).on('click', '#masiva', function () {
 });
 
 $(document).on('click', '#editar', async function () {
-  $('input[type=checkbox]:checked').each(function () {
-    //cada elemento seleccionado
-    console.log($(this).val());
-  });
 
-  console.log($(this).attr("data-id"));
+  let id=$(this).attr("data-id");
+    let html = `<div class="container">
+                  <h4>Editar Pregunta </h4><br>
+                  <form action="" method="POST">
+                    <label>Pregunta:</label>
+                    <textarea cols="40" rows="8" class="area" id="pregunta" placeholder="">`+$('#p-'+id).html()+`</textarea><br>
+                    <label>Respuesta:</label>
+                    <textarea cols="40" rows="8" class="area" id="respuesta" placeholder="">`+$('#r-'+id).html()+`</textarea>
+                    <div class="opciones">
+                      <div class="boton"><a class="registrar" data-id="`+id+`" id="actualizar" href="#">Guardar </a></div>
+                    </div>
+                  </form>
+              </div>
+              `;
+    Swal.fire({
+      title: '',
+      html: html,
+      showCancelButton: true,
+      showConfirmButton: false,
+      cancelButtonText: 'Cancelar',
+    });
+
+  
 });
 
 
@@ -197,7 +223,7 @@ $(document).on('click', '#eliminar', async function () {
       autoAlerta(
         'Elimimadas correctamente!',
         'success',
-        5000,
+        2000,
         '/administrador/panel',
       );
     } catch (e) {
@@ -208,3 +234,67 @@ $(document).on('click', '#eliminar', async function () {
 
 });
 
+
+$(document).on('click', '#actualizar', async function () {
+  var datos = {
+    descripcion: $('#respuesta').val(),
+    pregunta: {
+      id: $(this).attr("data-id"),
+      descripcion: $('#pregunta').val(),
+      idConsulta: $(this).attr("data-id"),
+      consulta: {
+        estado: 'RESUELTA',
+      },
+    }
+  };
+  try {
+    let url='http://localhost:3000/respuesta/'+$(this).attr("data-id");
+    var info = '';
+    await fetch(url, {
+      method: 'PATCH',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(datos),
+    })
+      .then((response) => response.json())
+      .then((data) => (info = data))
+      .catch((error) => console.error(error));
+
+    if (info.status == 401) {
+      alerta(datos.response, 'error');
+    }else if (info.status == 200 || datos.status == 201) {
+   
+      var datos = {
+          id: $(this).attr("data-id"),
+          descripcion: $('#pregunta').val()
+        };
+
+      let url2='http://localhost:3000/pregunta/'+$(this).attr("data-id");
+      var info = '';
+      await fetch(url2, {
+        method: 'PATCH',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(datos),
+      })
+        .then((response) => response.json())
+        .then((data) => (info = data))
+        .catch((error) => console.error(error));
+  
+      if (info.status == 401) {
+        alerta(datos.response, 'error');
+      }else if (info.status == 200 || datos.status == 201) {
+        autoAlerta(
+          'Pregunta actualizada correctamente!',
+          'success',
+          3000,
+          '/administrador/panel',
+        );
+     }
+    }
+  } catch (e) {
+    alerta(e, 'error');
+  }
+});

@@ -27,7 +27,7 @@ header.header
       ul.menu-list
         li#nav1.exit
           span.icon-plus
-          a.menu-link(href='#') Historico
+          a.menu-link(href='/administrador/panel') Preguntas
         li#nav1.exit
           span.icon-plus
           a.menu-link(href='#') Administrador
@@ -41,41 +41,12 @@ header.header
           a.menu-link(href='/persona/recuperar') Recuperar Contrase&ntilde;a
 
 #listado.content
-  .tarjeta
-    label#check.check
-      input#cbox1(type='checkbox' value='')
-      span.checkmark
-    .titulo
-      | &iquest;Cu&aacute;ntas electivas profesionales y socio-human&iacute;sticas hay que cursar y aprobar como requisito en la carrera de Ingenier&iacute;a de Sistemas?
-    .respuesta
-      | Pensum vigente  (115-03)  : 6 Electivas profesionales, 3 Electivas Socio-humanisticas
-    .base
-      span 22/06/2022
-  .tarjeta
-    label#check.check
-      input#cbox1(type='checkbox' value='')
-      span.checkmark
-    .titulo &iquest;Qu&eacute; tipos de modalidades de grado hay actualmente?
-    .respuesta
-      | 1.  TRABAJO DE GRADO 2. CURSO DE PROFUNDIZACI&Oacute;N,  3. TRABAJOS DIRIGIDO 4. PASANTIAS 5. TRABAJO DE INVESTIGACION
-    .base
-      span 22/06/2022
-  .tarjeta
-    label#check.check
-      input#cbox1(type='checkbox' value='')
-      span.checkmark
-    .titulo &iquest;Cu&aacute;les son los requisitos para realizar los cursos de profundizaci&oacute;n?
-    .respuesta
-      | 1. Estar matriculado  2.  haber terminado todas las materias.   3.Tener  promedio   igual o superior a 3.1    4. Pagar los derechos pecuniarios
-    .base
-      span 22/06/2022
+
 .opciones
   #agregar.boton
     a.registrar(href='/administrador/panel/agregar') Registrar Consulta
   #masiva.boton
     .registrar Carga Masiva
-  .boton
-    #editar.editar Editar
   .boton
     #eliminar.eliminar Eliminar
 footer

@@ -128,7 +128,7 @@ content: ""
 
 footer {
 	font-size: 20;
-  position: inherit;
+  position: fixed;
   width: 100%;
   text-align: center;
   padding: 3px;
@@ -150,6 +150,7 @@ footer a{
 
 .opciones{
 	display: flex;
+  margin-bottom: 65px;
 	margin-left: 5rem;
 }
 
@@ -182,6 +183,17 @@ footer a{
     color: black;
     border-radius: 6px;
     border: 2px solid green;
+  }
+
+  .act{
+    cursor: pointer;
+  	padding: 2px;
+    font-weight: 600;
+    font-size: 20px;
+  	text-decoration: none;
+    color: black;
+    border-radius: 6px;
+    border: 2px solid rgb(66, 69, 249);
   }
 
   .editar{
