@@ -8,6 +8,7 @@ import { CreatePersonaDto } from './persona/dto/persona.dto';
 import { tipoUsuario } from './persona/entities/persona.entity';
 import { CreatePreguntaDto } from './pregunta/dto/pregunta.dto';
 import { PreguntaService } from './pregunta/pregunta.service';
+import { CreateRespuestaDto } from './respuesta/dto/respuesta.dto';
 import { RespuestaService } from './respuesta/respuesta.service';
 
 @Injectable()
@@ -45,13 +46,21 @@ export class AppService {
                 estado: estadoConsulta.REVISION,
                 idCliente: 0
               }
-              const pregunta : CreatePreguntaDto={
+              var preguntav : CreatePreguntaDto={
                 id: 0,
                 descripcion: '',
                 idConsulta: 0,
                 consulta: consulta
               } 
-              await this.preguntaService.create(pregunta)
+              const preguntaCreda=await this.preguntaService.create(preguntav)
+              preguntav.id=preguntaCreda.response.id
+              const respuesta :CreateRespuestaDto={
+                id: 0,
+                descripcion: 'Sin responder',
+                pregunta: preguntav,
+                idPregunta: preguntaCreda.response.id
+              }
+              await this.respuestaService.create(respuesta)
               return {
                 status: 200,
                 response: "Su pregunta no se encuentra en el sistema, pero ahora fue almacenada por favor registrese para enviar le un correo con la respuesta",
