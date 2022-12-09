@@ -27,13 +27,20 @@ export class AppService {
       } else if (intent.queryResult.intent.displayName == 'leer_nombre') {
         return { status: 200, response: intent.queryResult.fulfillmentText };
       } else if (intent.queryResult.intent.displayName == 'Identificar') {
-        return {
-          status: 200,
-          response: await this.respuestaService.search(
-            intent.queryResult.parameters.fields.any.listValue.values[0]
-              .stringValue,
-          ),
-        };
+        const respuestas= await this.respuestaService.search(
+          intent.queryResult.parameters.fields.any.listValue.values[0]
+            .stringValue)
+            if(respuestas.response.length > 0) {
+              return {
+                status: 200,
+                response: respuestas,
+              };
+            }else{
+              return {
+                status: 200,
+                response: "Su pregunta no se encuentra en el sistema, pero ahora fue almacenada por favor registrese para enviar le un correo con la respuesta",
+              };
+            }
       } else if (intent.queryResult.intent.displayName == 'Registro') {
         const persona: CreatePersonaDto = {
           id: 0,
