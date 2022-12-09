@@ -8,9 +8,9 @@ export class Pregunta {
     @JoinColumn({name:"id_consulta"})
     consulta:Consulta;
 
-    @OneToOne(()=>Respuesta)
+    @OneToOne(()=>Respuesta,{cascade:true})
     @JoinColumn({name:"id_respuesta"})
-    id_respuesta:Respuesta;
+    respuesta:Respuesta;
     
     @RelationId((pregunta:Pregunta)=>pregunta.consulta)
     id_consulta:number;
